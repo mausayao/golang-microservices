@@ -1,22 +1,27 @@
 package domain
 
 import (
-	"errors"
 	"fmt"
+	"golang-microservices/utils"
+	"net/http"
 )
 
 var (
-	users = map[int64]*UseUser{
-		123: {Id: 123, FirstName: "Teste", LastName: "Outro", Email: "algo@algo.com"}
+	users = map[int64]*User{
+		123: {Id: 123, FirstName: "Teste", LastName: "Outro", Email: "algo@algo.com"},
 	}
 )
 
-func GetUser(userId int64) (*User, error) {
+func GetUser(userId int64) (*User, *utils.AppError) {
 
 	user := users[userId]
 
 	if user == nil {
-		return nil, errors.New(fmt.Sprintf("user not found for $v", userId))
+		return nil, &utils.AppError{
+			Message:    fmt.Sprintf("user %v was not found", userId),
+			StatusCode: http.StatusNotFound,
+			Code:       "not_found",
+		}
 	}
 
 	return user, nil

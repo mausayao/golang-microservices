@@ -1,7 +1,10 @@
 package services
 
-import "golang-microservices/domain"
+import (
+	"golang-microservices/domain"
+	"golang-microservices/utils"
+)
 
-func GetUser(userId int64) (*domain.User, error) {
+func GetUser(userId int64) (*domain.User, *utils.AppError) {
 	return domain.GetUser(userId)
 }
