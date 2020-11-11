@@ -16,18 +16,18 @@ var (
 type UserDao struct {
 }
 
-func (c UserDao) GetUser(userId int64) (domain.User, *utils.AppError) {
+func (c UserDao) GetUser(userId int64) (*domain.User, *utils.AppError) {
 
 	user := users[userId]
 
 	if user == nil {
-		return domain.User{}, &utils.AppError{
+		return user, &utils.AppError{
 			Message:    fmt.Sprintf("user %v was not found", userId),
 			StatusCode: http.StatusNotFound,
 			Code:       "not_found",
 		}
 	}
 
-	return *user, nil
+	return user, nil
 
 }
