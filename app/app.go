@@ -1,14 +1,12 @@
 package app
 
 import (
-	"golang-microservices/controllers"
+	"golang-microservices/routes"
 	"log"
 	"net/http"
 )
 
 func StartApp() {
-	http.HandleFunc("/users", controllers.GetUser)
-
+	routes.RoutesLoad()
 	log.Fatal(http.ListenAndServe(":8000", nil))
-
 }

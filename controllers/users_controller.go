@@ -9,6 +9,7 @@ import (
 )
 
 func GetUser(resp http.ResponseWriter, req *http.Request) {
+	service := services.UserService{}
 	userId, err := strconv.ParseInt(req.URL.Query().Get("user_id"), 10, 64)
 
 	if err != nil {
@@ -26,7 +27,7 @@ func GetUser(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	user, apiErr := services.GetUser(userId)
+	user, apiErr := service.GetUser(userId)
 
 	if apiErr != nil {
 		jsonValue, _ := json.Marshal(apiErr)
