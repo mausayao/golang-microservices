@@ -34,4 +34,9 @@ func TestGetUserNoError(t *testing.T) {
 	assert.NotNil(t,user)
 
 	assert.Equal(t, int64(123), user.Id)
+
+	assert.EqualValues(t, 123, user.Id)
+	assert.EqualValues(t, "Teste", user.FirstName)
+	assert.EqualValues(t, "Outro", user.LastName)
+	assert.EqualValues(t, "algo@algo.com", user.Email)
 }
